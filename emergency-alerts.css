@@ -372,7 +372,7 @@ body.oualerts-open {
 }
 .oualerts-notify-title i {
     margin-right: 8px;
-    color: #6091ba
+    color: #6091ba;
 }
 /*Emergency*/
 .oualerts-notify-error {
@@ -442,7 +442,7 @@ body.oualerts-open {
     z-index: 9000;
     background: rgba(0, 0, 0, 0.42)
 }
-/*Archive widget*/
+/*Archive/Active widget*/
 .oualerts-archive-list, .oualerts-active-update-list {
     list-style: none;
     margin: 0;
@@ -451,6 +451,14 @@ body.oualerts-open {
     padding: 10px 15px;
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.37);
     margin: 10px 0px;
+}
+.oualerts-title i{
+    margin-right: 10px;
+}
+.oualerts-active-update-title {
+    border-bottom: 2px solid lightgray;
+    margin-bottom: 4px;
+    font-weight: 500;
 }
 .oualerts-archive-update {
     border-bottom: 1px solid lightgrey;

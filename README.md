@@ -35,9 +35,6 @@ Active Alert Pop-up Options
 | title  | true  | Set to false to hide title in popup |
 | subtitle | true  | Set to false to hide subtitle in popup |
 | description  | true  | Set to false to hide description in popup |
-| emergencyPosition  |  '' | Short cut option, Sets position for emergency alerts|
-| warningPosition  | ''  | Short cut option, Sets position for warning alerts |
-| announcementPosition  | ''  | Short cut option, Sets position for announcement alerts |
 | emergency  | See Below  | Object that specifies how an emergency alert is rendered |
 | warning  | See Below  | Object that specifies how an warning alert is rendered |
 | announcement  | See Below  | Object that specifies how an announcement alert is rendered |
@@ -54,7 +51,7 @@ $('body').OUAlert({
     	class    : 'oualerts-notify-error',
         position : 'modal', //Positions are ‘top’, ‘bottom’, ‘modal’
     	icon     : 'fa fa-bomb', //icon shown left of popup title,
-        iconColor: false, //Optional Ex: '#fff', sets icons color
+        iconColor: '#F44336', //Optional Ex: '#fff', sets icons color
         fontColor: false, //Optional Ex: '#333', sets font color
         backgroundColor : false, //Optional Ex: 'blue', sets background color
         template : false //Optional, see below
@@ -63,7 +60,7 @@ $('body').OUAlert({
     	class    : 'oualerts-notify-warning',
         position : 'top',
     	icon     : 'fa fa-exclamation-circle', 
-        iconColor: false,
+        iconColor: '#f08a24',
         fontColor: false,
         backgroundColor : false,
         template : false //Optional, see below
@@ -72,7 +69,7 @@ $('body').OUAlert({
     	class    : 'oualerts-notify-info',
         position : 'modal', 
     	icon     : 'fa fa-bullhorn',
-        iconColor: false,
+        iconColor: '#6091ba',
         fontColor: false,
         backgroundColor : false,
         template : false 
@@ -133,7 +130,8 @@ When using as a widget the following options are availible :
 | type  | ‘active’  | 'active' or 'archived' data|
 | popup  | true  | popup option must be set to false|
 | widgetTemplate  | See Below | template function to specify a custom html template |
-| archiveHeader | true | Adds a header of "Archived Alerts" when type is 'archived'
+| archiveHeader | true | Adds a header of "Archived Alerts" when type is 'archived' |
+| icon | false | Renders icons next to the alert title |
 
 Custom widgetTemplate usage:
 

@@ -29,7 +29,7 @@
 	            class      : 'oualerts-notify-error',
 	            position   : 'modal',
 	            icon       : 'fa fa-exclamation-triangle',
-	            iconColor  : '',
+	            iconColor  : '#F44336',
 	            fontColor  : '',
 	            backgroundColor : '',
 	            template   : false
@@ -38,7 +38,7 @@
 	            class    : 'oualerts-notify-warning',
 	            position : 'top',
 	            icon     : 'fa fa-exclamation-circle',
-	            iconColor : '',
+	            iconColor : '#f08a24',
 	            fontColor : '',
 	            backgroundColor : '',
 	            template   : false
@@ -47,7 +47,7 @@
 	            class    : 'oualerts-notify-info',
 	            position : 'top',
 	            icon     : 'fa fa-bullhorn',
-	            iconColor  : '',
+	            iconColor  : '#6091ba',
 	            fontColor  : '',
 	            backgroundColor : '',
 	            template   : false
@@ -55,17 +55,8 @@
 	        widgetTemplate : false,
 	        archiveHeader : true
 		};
-		$.extend(this.defaults, options);
 
-		if (options.emergencyPosition) {
-			this.defaults.emergency.position = options.emergencyPosition
-		}
-		if (options.warningPosition) {
-			this.defaults.warning.position = options.warningPosition
-		}
-		if (options.announcementPosition) {
-			this.defaults.announcement.position = options.announcementPosition
-		}
+		$.extend(true, this.defaults, options);
 
 		this.init();
     };
@@ -273,7 +264,7 @@
     	var $archiveList = $('<ul class="oualerts-archive-list"></ul>');
     	
     	data.archive.forEach(function(item) {
-    		var $alert = _alertTemplate(item, data);
+    		var $alert = _alertTemplate(item, options);
     		var $tmpl = $('<li class="oualerts-archive"></li>');
     		var $updateCont = $('<ul class="oualerts-update-cont"/>');
 
@@ -309,6 +300,15 @@
     	var $alertTitle = $('<h2 class="oualerts-title">' + data.title + '</h2>');
     	var $alertDescription = $('<div>' + data.description + '</div>');
 
+        if (options.icon) {
+            var $icon = $('<i class="' + options[data['ou:severity'].toLowerCase()].icon + '"></i>');
+            var iconColor = options[data['ou:severity'].toLowerCase()].iconColor;
+            if (iconColor) {
+                $icon.css({ color : iconColor});
+            }
+            $alertTitle.prepend($icon);
+        }
+
     	$alertContainer
     	.append($alertDate)
     	.append($alertTitle);
@@ -327,11 +327,10 @@
     var _updateTemplate = function (data, options, archive) {
     	var $update =
     		'<div class="' + (archive ? '' : 'oualerts-active-update') + '">' + 
-	    		'<div>' + 
+	    		'<div class="' + (archive ? '' : 'oualerts-active-update-title') + '">' + 
 	    		data.title + ' <span class="pull-right">' + convertDateTime(data.pubDate) + '</span>' + 
 	    		'</div>' +
 	    		'<div>' + data.description + '</div>' +
-	    		// '<div>http://es6.com</div>' +
 	    	'</div>';
     	return $update;
     };
