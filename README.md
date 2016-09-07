@@ -19,25 +19,27 @@ $('body').OUAlert({
 ```
 
 Active Alert Pop-up Options
-| option  |  default | description |
-| ------------- | ------------- | ------------- |
-| type  | ‘active’  |
-| popup  | true  |
-| activePath  | '/ou-alerts/active-alerts.xml'  | default path to active alerts file |
-| archivedPath  | '/ou-alerts/active-alerts.xml'  | default path to archived alerts file |
-| delay  | false  | specifies delay in ms, before popup shows |
-| closeOnClick  | true  | clicking anywhere closes the popup |
-| animationType  | 'animated-fast'  | animation timing CSS class for presenting popups (animated-super-fast, animated-fast, animated, animated-slow) |
-| showClass  | ‘fadeInDown’ | CSS animation class for presenting popups (zoomIn, fadeInDown, fadeInScale, expandOpen, jumpUp) |
-| hideClass  | ‘zoom out’ | CSS animation class for closing popups (zoomout) |
-| icon  | false  | Set to true to show icon alert icon in popup |
-| date  | true  | Set to false to hide date in popup |
-| title  | true  | Set to false to hide title in popup |
-| subtitle | true  | Set to false to hide subtitle in popup |
-| description  | true  | Set to false to hide description in popup |
-| emergency  | See Below  | Object that specifies how an emergency alert is rendered |
-| warning  | See Below  | Object that specifies how an warning alert is rendered |
-| announcement  | See Below  | Object that specifies how an announcement alert is rendered |
+
+>| option  |  default | description |
+>| ------------- | ------------- | ------------- |
+>| type  | ‘active’  |
+>| popup  | true  |
+>| activePath  | '/ou-alerts/active-alerts.xml'  | default path to active alerts file |
+>| archivedPath  | '/ou-alerts/active-alerts.xml'  | default path to archived alerts file |
+>| delay  | false  | specifies delay in ms, before popup shows |
+>| closeOnClick  | true  | clicking anywhere closes the popup |
+>| animationType  | 'animated-fast'  | animation timing CSS class for presenting popups (animated-super-fast, animated-fast, animated, animated-slow) |
+>| showClass  | ‘fadeInDown’ | CSS animation class for presenting popups (zoomIn, fadeInDown, fadeInScale, expandOpen, jumpUp) |
+>| hideClass  | ‘zoom out’ | CSS animation class for closing popups (zoomout) |
+>| icon  | false  | Set to true to show icon alert icon in popup |
+>| date  | true  | Set to false to hide date in popup |
+>| title  | true  | Set to false to hide title in popup |
+>| subtitle | true  | Set to false to hide subtitle in popup |
+>| description  | true  | Set to false to hide description in popup |
+>| emergency  | See Below  | Object that specifies how an emergency alert is rendered |
+>| warning  | See Below  | Object that specifies how an warning alert is rendered |
+>| announcement  | See Below  | Object that specifies how an announcement alert is rendered |
+
 
 
 Custom Alert type handling sample (shows defaults):
