@@ -295,17 +295,24 @@
     };
 
     var _alertTemplate = function (data, options) {
-    	var $alertContainer = $('<div></div>');
+    	var $alertContainer = $('<article/>');
     	var $alertDate = $('<div>' + convertDateTime(data.pubDate) + '</div>');
     	var $alertTitle = $('<h2 class="oualerts-title">' + data.title + '</h2>');
-    	var $alertDescription = $('<div>' + data.description + '</div>');
+    	var $alertDescription = $('<p>' + data.description + '</p>');
 
         if (options.icon) {
-            var $icon = $('<i class="' + options[data['ou:severity'].toLowerCase()].icon + '"></i>');
-            var iconColor = options[data['ou:severity'].toLowerCase()].iconColor;
-            if (iconColor) {
-                $icon.css({ color : iconColor});
+            var icon = options[data['ou:severity'].toLowerCase()].icon;
+            //image instead of icon
+            if (icon.indexOf('/') > -1) {
+                var $icon = $('<img class="oualerts-title-icon" src="' + icon + '" alt="Alert Icon"/>')
+            } else {
+                var $icon = $('<i class="' + icon + '"></i>');
+                var iconColor = options[data['ou:severity'].toLowerCase()].iconColor;
+                if (iconColor) {
+                    $icon.css({ color : iconColor});
+                }
             }
+            
             $alertTitle.prepend($icon);
         }
 
@@ -326,12 +333,12 @@
 
     var _updateTemplate = function (data, options, archive) {
     	var $update =
-    		'<div class="' + (archive ? '' : 'oualerts-active-update') + '">' + 
-	    		'<div class="' + (archive ? '' : 'oualerts-active-update-title') + '">' + 
+    		'<article>' + 
+	    		'<h5 class="' + (archive ? '' : 'oualerts-active-update-title') + '">' + 
 	    		data.title + ' <span class="pull-right">' + convertDateTime(data.pubDate) + '</span>' + 
-	    		'</div>' +
-	    		'<div>' + data.description + '</div>' +
-	    	'</div>';
+	    		'</h5>' +
+	    		'<p>' + data.description + '</p>' +
+	    	'</article>';
     	return $update;
     };
 
@@ -341,7 +348,9 @@
     	var $updateCont = $('<ul class="oualerts-active-update-list"/>');
 
     	data.updates.forEach(function(update) {
-    		$updateCont.append(_updateTemplate(update, options));
+            var $updateTmpl = $('<li class="oualerts-active-update"></li>');
+            $updateTmpl.append(_updateTemplate(update, options));
+    		$updateCont.append($updateTmpl);
     	});
 
     	$alertContainer

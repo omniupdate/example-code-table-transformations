@@ -9,9 +9,9 @@ Basic useful feature list:
 
 Setup Requirements:
 
-jQuery minimum version 1.12.4
-emergency-alerts.js
-emergency-alerts.css
+ * jQuery minimum version 1.12.4
+ * emergency-alerts.js
+ * emergency-alerts.css
 
 
 Basic Active Alert Pop-up Sample:
@@ -54,31 +54,31 @@ $('body').OUAlert({
     activePath : '/ou-alerts/active-alerts.xml',
     icon       : true,
     emergency  : {
-    	class    : 'oualerts-notify-error',
-        position : 'modal', //Positions are ‘top’, ‘bottom’, ‘modal’
-    	icon     : 'fa fa-bomb', //icon shown left of popup title,
-        iconColor: '#F44336', //Optional Ex: '#fff', sets icons color
-        fontColor: false, //Optional Ex: '#333', sets font color
-        backgroundColor : false, //Optional Ex: 'blue', sets background color
-        template : false //Optional, see below
+    	class           : 'oualerts-notify-error',
+        position        : 'modal', //Positions are ‘top’, ‘bottom’, ‘modal’
+    	icon            : 'fa fa-bomb', //icon shown left of popup title. Icon CSS class or path to image.
+        iconColor       : '#F44336', //Optional Ex: '#fff', sets icons color
+        fontColor       : '', //Optional Ex: '#333', sets font color
+        backgroundColor : '', //Optional Ex: 'blue', sets background color
+        template        : '' //Optional, see below
     },
     warning  : {
-    	class    : 'oualerts-notify-warning',
-        position : 'top',
-    	icon     : 'fa fa-exclamation-circle', 
-        iconColor: '#f08a24',
-        fontColor: false,
-        backgroundColor : false,
-        template : false //Optional, see below
+    	class           : 'oualerts-notify-warning',
+        position        : 'top',
+    	icon            : 'fa fa-exclamation-circle', 
+        iconColor       : '#f08a24',
+        fontColor       : '',
+        backgroundColor : '',
+        template        : ''
     },
     announcement  : {
-    	class    : 'oualerts-notify-info',
-        position : 'modal', 
-    	icon     : 'fa fa-bullhorn',
-        iconColor: '#6091ba',
-        fontColor: false,
+    	class           : 'oualerts-notify-info',
+        position        : 'modal', 
+    	icon            : 'fa fa-bullhorn',
+        iconColor       : '#6091ba',
+        fontColor       : false,
         backgroundColor : false,
-        template : false 
+        template        : false 
     }
 });
 ```
@@ -137,7 +137,7 @@ When using as a widget the following options are availible :
 | popup  | true  | popup option must be set to false|
 | widgetTemplate  | See Below | template function to specify a custom html template |
 | archiveHeader | true | Adds a header of "Archived Alerts" when type is 'archived' |
-| icon | false | Renders icons next to the alert title |
+| icon | false | Renders icons next to the alert title. (icon is pulled from 'emergency', 'warning', or 'announcement' option object) |
 
 Custom widgetTemplate usage:
 

@@ -452,7 +452,10 @@ body.oualerts-open {
     box-shadow: 2px 4px 10px rgba(0, 0, 0, 0.37);
     margin: 10px 0px;
 }
-.oualerts-title i{
+.oualerts-title img {
+    height: 34px;
+}
+.oualerts-title i, .oualerts-title img{
     margin-right: 10px;
 }
 .oualerts-active-update-title {
