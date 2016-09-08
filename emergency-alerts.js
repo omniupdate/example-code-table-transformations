@@ -2,10 +2,10 @@
 	'use strict';
     var OUAlerts = function (element, options) {
 		this.el = $(element);
-		this.$notification;
-		this.$widget;
-		this.orgPadding;
-		this.severity;
+		this.$notification = null;
+		this.$widget = null;
+		this.orgPadding = null;
+		this.severity = null;
 		this.defaults = {
 			archivedPath : '/ou-alerts/archived-alerts.xml',
 			activePath : '/ou-alerts/active-alerts.xml',
@@ -98,9 +98,9 @@
 	        success: function(xml) {
 	        	//parse data/sort content
 	        	if (type === 'active') {
-		        	def.resolve(self.prepareData(xmlToJson(xml)))
+		        	def.resolve(self.prepareData(xmlToJson(xml)));
 	        	} else {
-		        	def.resolve(self.prepareArchivedData(xmlToJson(xml)))
+		        	def.resolve(self.prepareArchivedData(xmlToJson(xml)));
 	        	}
 	        },
 	        error : function (err) {
@@ -121,7 +121,7 @@
 	    	}
 		}
     	this.el.html(this.$widget);
-    }
+    };
 
     OUAlerts.prototype.notify = function (alert, options) {
     	//top, bottom, or modal view
@@ -259,7 +259,7 @@
     };
 
     var _createArchivedTemplate = function (data, options) {
-    	var $archiveCont = $('<div class="oualerts-archive-wrapper"></div>')
+    	var $archiveCont = $('<div class="oualerts-archive-wrapper"></div>');
     	var $archiveHeader = $('<h2>Archived Alerts</h2>');
     	var $archiveList = $('<ul class="oualerts-archive-list"></ul>');
     	
@@ -271,7 +271,7 @@
     		$tmpl.append($alert);
     		//updates
     		if (item.updates && item.updates.length) {
-    			var $updateContHeader = $('<h4 class="oualerts-archive-update-header">Updates: </h4>')
+    			var $updateContHeader = $('<h4 class="oualerts-archive-update-header">Updates: </h4>');
     			$tmpl.append($updateContHeader);
     			$tmpl.append($updateCont);
     			item.updates.forEach(function(update) {
@@ -349,7 +349,8 @@
     	.append($updateCont);
 
     	return $alertContainer;
-    }
+    };
+
     OUAlerts.prototype.createNotificationTemplate = function (alert, options) {
         var self = this,
         	$iconEl,
@@ -442,7 +443,7 @@
     	}
 
     	return data;
-    };
+    }
 
     function xmlToJson(xml) {
 		var obj = {};
@@ -467,7 +468,7 @@
 			}
 		}
 		return obj;
-	};
+	}
 
 	$.fn.OUAlert = function() {
 		var _ = this, opt = arguments[0], l = _.length, i = 0;

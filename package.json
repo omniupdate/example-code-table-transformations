@@ -1,0 +1,26 @@
+{
+  "name": "emergency-alerts",
+  "version": "1.0.0",
+  "description": "jQuery plugin for rendering alerts from OmniUpdates Emergency Alerts Module",
+  "main": "emergency-alerts.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/omniupdate/Emergency-Alerts-Client.git"
+  },
+  "author": "bdougherty@omniupdate.com",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/omniupdate/Emergency-Alerts-Client/issues"
+  },
+  "homepage": "https://github.com/omniupdate/Emergency-Alerts-Client#readme",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-concat": "^2.6.0",
+    "gulp-jshint": "^2.0.1",
+    "gulp-uglify": "^2.0.0",
+    "jshint": "^2.9.3"
+  }
+}

@@ -7,6 +7,12 @@ Basic useful feature list:
  * Add archived alerts list widget to page
  * Add custom template to determine custom layout of widget or Pop-up
 
+Setup Requirements:
+
+jQuery minimum version 1.12.4
+emergency-alerts.js
+emergency-alerts.css
+
 
 Basic Active Alert Pop-up Sample:
 
@@ -39,8 +45,6 @@ Active Alert Pop-up Options
 >| emergency  | See Below  | Object that specifies how an emergency alert is rendered |
 >| warning  | See Below  | Object that specifies how an warning alert is rendered |
 >| announcement  | See Below  | Object that specifies how an announcement alert is rendered |
-
-
 
 Custom Alert type handling sample (shows defaults):
 
