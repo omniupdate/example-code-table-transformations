@@ -310,12 +310,12 @@
     	var $alertDescription = $('<p class="oualerts-msg">' + data.description + '</p>');
 
         if (options.icon) {
-            var icon = options[data['ou:severity'].toLowerCase()].icon;
+           var $icon, icon = options[data['ou:severity'].toLowerCase()].icon;
             //image instead of icon
             if (icon.indexOf('/') > -1) {
-                var $icon = $('<img class="oualerts-title-icon" src="' + icon + '" alt="Alert Icon"/>')
+                $icon = $('<img class="oualerts-title-icon" src="' + icon + '" alt="Alert Icon"/>');
             } else {
-                var $icon = $('<i class="' + icon + '"></i>');
+                $icon = $('<i class="' + icon + '"></i>');
                 var iconColor = options[data['ou:severity'].toLowerCase()].iconColor;
                 if (iconColor) {
                     $icon.css({ color : iconColor});
