@@ -49,7 +49,7 @@
 	            icon     : 'fa fa-bullhorn',
 	            iconColor  : '#6091ba',
 	            fontColor  : '',
-	            backgroundColor : '#B3CFE8',
+	            backgroundColor : '',
 	            template   : false
 	        },
 	        widgetTemplate : false,

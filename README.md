@@ -60,8 +60,8 @@ $('body').OUAlert({
     	icon            : 'fa fa-bomb', //icon shown left of popup title. Icon CSS class or path to image.
         iconColor       : '#F44336', //Optional Ex: '#fff', sets icons color
         fontColor       : '', //Optional Ex: '#333', sets font color
-        backgroundColor : '', //Optional Ex: 'blue', sets background color
-        template        : '' //Optional, see below
+        backgroundColor : '#FFC5C0', //Optional Ex: 'blue', sets background color
+        template        : false //Optional, see below
     },
     warning  : {
     	class           : 'oualerts-notify-warning',
@@ -69,16 +69,16 @@ $('body').OUAlert({
     	icon            : 'fa fa-exclamation-circle', 
         iconColor       : '#f08a24',
         fontColor       : '',
-        backgroundColor : '',
-        template        : ''
+        backgroundColor : '#FFE5C0',
+        template        : false
     },
     announcement  : {
     	class           : 'oualerts-notify-info',
         position        : 'modal', 
     	icon            : 'fa fa-bullhorn',
         iconColor       : '#6091ba',
-        fontColor       : false,
-        backgroundColor : false,
+        fontColor       : '',
+        backgroundColor : '',
         template        : false 
     }
 });
