@@ -19,7 +19,7 @@
 			dateFormat   : '',
 			//behavior
 			delay        : false,
-			closeOnClick : true,
+			closeOnClick : false,
 			popup        : true,
 			//CSS classes
 	        showClass: 'fadeInDown',
@@ -31,7 +31,7 @@
 	            icon       : 'fa fa-exclamation-triangle',
 	            iconColor  : '#F44336',
 	            fontColor  : '',
-	            backgroundColor : '',
+	            backgroundColor : '#FFC5C0',
 	            template   : false
 	        },
 	        warning: {
@@ -40,7 +40,7 @@
 	            icon     : 'fa fa-exclamation-circle',
 	            iconColor : '#f08a24',
 	            fontColor : '',
-	            backgroundColor : '',
+	            backgroundColor : '#FFE5C0',
 	            template   : false
 	        },
 	        announcement: {
@@ -49,7 +49,7 @@
 	            icon     : 'fa fa-bullhorn',
 	            iconColor  : '#6091ba',
 	            fontColor  : '',
-	            backgroundColor : '',
+	            backgroundColor : '#B3CFE8',
 	            template   : false
 	        },
 	        widgetTemplate : false,
@@ -271,13 +271,18 @@
     		$tmpl.append($alert);
     		//updates
     		if (item.updates && item.updates.length) {
-    			var $updateContHeader = $('<h4 class="oualerts-archive-update-header">Updates: </h4>');
-    			$tmpl.append($updateContHeader);
+    			var $updateContHeader = $('<h4 class="oualerts-archive-update-header">UPDATES</h4>');
+                $tmpl.append($updateContHeader);
+    			$tmpl.append('<hr/>');
     			$tmpl.append($updateCont);
-    			item.updates.forEach(function(update) {
+    			item.updates.forEach(function(update, i) {
        				var $update = _updateTemplate(update, options, true);
     				var $updateTmpl = $('<li class="oualerts-archive-update"></li>');
-    				$updateTmpl.append($update);
+                    if (i === item.updates.length - 1) {
+                        $updateTmpl.append($update);
+                    } else {
+                        $updateTmpl.append($update).append('<hr/>');
+                    }
     				$updateCont.append($updateTmpl);
 	    		});
 	    		$tmpl.append($updateCont);
@@ -296,9 +301,9 @@
 
     var _alertTemplate = function (data, options) {
     	var $alertContainer = $('<article/>');
-    	var $alertDate = $('<div>' + convertDateTime(data.pubDate) + '</div>');
+    	var $alertDate = $('<div class="oualerts-date">' + convertDateTime(data.pubDate) + '</div>');
     	var $alertTitle = $('<h2 class="oualerts-title">' + data.title + '</h2>');
-    	var $alertDescription = $('<p>' + data.description + '</p>');
+    	var $alertDescription = $('<p class="oualerts-msg">' + data.description + '</p>');
 
         if (options.icon) {
             var icon = options[data['ou:severity'].toLowerCase()].icon;
@@ -334,27 +339,33 @@
     var _updateTemplate = function (data, options, archive) {
     	var $update =
     		'<article>' + 
+                '<div class="oualerts-date oualerts-active-update-date">' + convertDateTime(data.pubDate) + '</div>' +
 	    		'<h5 class="' + (archive ? '' : 'oualerts-active-update-title') + '">' + 
-	    		data.title + ' <span class="pull-right">' + convertDateTime(data.pubDate) + '</span>' + 
+	    		data.title + 
 	    		'</h5>' +
-	    		'<p>' + data.description + '</p>' +
+	    		'<p class="oualerts-active-update-msg">' + data.description + '</p>' +
 	    	'</article>';
     	return $update;
     };
 
     var _createWidgetTemplate = function (data, options) {
     	var $alertContainer = _alertTemplate(data.alert, options);
-    	var $updateHeader = $('<h4>Updates:</h4>');
+    	var $updateHeader = $('<h4 class="oualerts-active-update-title">UPDATES</h4>');
     	var $updateCont = $('<ul class="oualerts-active-update-list"/>');
 
-    	data.updates.forEach(function(update) {
+    	data.updates.forEach(function(update, i) {
             var $updateTmpl = $('<li class="oualerts-active-update"></li>');
             $updateTmpl.append(_updateTemplate(update, options));
-    		$updateCont.append($updateTmpl);
+            if (i === data.updates.length - 1) {
+                $updateCont.append($updateTmpl);
+            } else {
+                $updateCont.append($updateTmpl).append('<hr/>');
+            }
     	});
 
     	$alertContainer
     	.append($updateHeader)
+        .append('<hr/>')
     	.append($updateCont);
 
     	return $alertContainer;
@@ -366,8 +377,10 @@
             $innerIconEl,
             $iconWrapper,
             $body,
+            alertType = options[alert['ou:severity'].toLowerCase()],
+            position = alertType.position,
             $notify = $('<div></div>', {
-                'class': 'oualerts-notify ' + options[alert['ou:severity'].toLowerCase()].class + ' ' + options.animationType + ' ' + options.showClass
+                'class': 'oualerts-notify ' + alertType.class + ' ' + options.animationType + ' ' + options.showClass
             });
 
         $body = $('<div class="oualerts-notify-body"/>');
@@ -378,10 +391,10 @@
 			$body.append($date);
         }
         if (options.title) {
-        	var $title = $('<div class="oualerts-notify-title">' + alert.title + '</div>');
+        	var $title = $('<h3 class="oualerts-notify-title">' + alert.title + '</h3>');
         	if (options.icon) {
-        		var $icon = $('<i class="' + options[alert['ou:severity'].toLowerCase()].icon + '"></i>');
-        		var iconColor = options[alert['ou:severity'].toLowerCase()].iconColor;
+        		var $icon = $('<i class="' + alertType.icon + '"></i>');
+        		var iconColor = alertType.iconColor;
         		if (iconColor) {
         			$icon.css({ color : iconColor});
         		}
@@ -390,13 +403,13 @@
         	$body.append($title);
         }
         if (options.subtitle && alert['ou:subtitle']) {
-        	var $subTitle = $('<div class="oualerts-notify-subtitle">' + alert['ou:subtitle'] + '</div>');
+        	var $subTitle = $('<h4 class="oualerts-notify-subtitle">' + alert['ou:subtitle'] + '</h4>');
         	$body.append($subTitle);
         }
         if (options.description) {
-        	var $desc = $('<div class="oualerts-notify-msg">' + alert.description + '</div>');
+        	var $desc = $('<p class="oualerts-notify-msg">' + alert.description + ' </p>');
 	       	if (options.link && alert.guid && alert.guid.indexOf('.xml') < 0) {
-	        	var $link = $('<a href="' + alert.guid + '" target="_blank" class="oualerts-notify-link"> Read More...</a>');
+	        	var $link = $('<a href="' + alert.guid + '" target="_blank" class="oualerts-notify-link">Read More...</a>');
 	        	$desc.append($link);
 	        }
         	$body.append($desc);
@@ -409,25 +422,32 @@
             self.remove();
         }).appendTo($notify);
 
-        if (options[alert['ou:severity'].toLowerCase()].position === 'bottom') {
+        var backgroundColor = alertType.backgroundColor;
+        if (backgroundColor) {
+            $notify.css({ backgroundColor : backgroundColor});
+        }
+        var fontColor = alertType.fontColor;
+        if (fontColor) {
+            $notify.css({ color : fontColor});
+        }
+
+        if (position === 'bottom') {
     		$notify.addClass('oualerts-bottom');
     	} else
-    	if (options[alert['ou:severity'].toLowerCase()].position === 'top') {
+    	if (position === 'top') {
     		$notify.addClass('oualerts-top');
     	} else
-    	if (options[alert['ou:severity'].toLowerCase()].position === 'modal') {
+    	if (position === 'modal') {
     		$notify.addClass('oualerts-modal');
+
+            if (alertType.modalSize) {
+                $notify.addClass(alertType.modalSize);
+            } else {
+                $notify.addClass('large');
+            }
+
     		$notify = $('<div class="oualerts-notify-modal-overlay"/>').append($notify);
     	}
-
-    	var backgroundColor = options[alert['ou:severity'].toLowerCase()].backgroundColor;
-		if (backgroundColor) {
-			$notify.css({ backgroundColor : backgroundColor});
-		}
-		var fontColor = options[alert['ou:severity'].toLowerCase()].fontColor;
-		if (fontColor) {
-			$notify.css({ color : fontColor});
-		}
 
         return $notify;
     };

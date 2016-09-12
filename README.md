@@ -33,7 +33,7 @@ Active Alert Pop-up Options
 >| activePath  | '/ou-alerts/active-alerts.xml'  | default path to active alerts file |
 >| archivedPath  | '/ou-alerts/active-alerts.xml'  | default path to archived alerts file |
 >| delay  | false  | specifies delay in ms, before popup shows |
->| closeOnClick  | true  | clicking anywhere closes the popup |
+>| closeOnClick  | false  | clicking anywhere closes the popup |
 >| animationType  | 'animated-fast'  | animation timing CSS class for presenting popups (animated-super-fast, animated-fast, animated, animated-slow) |
 >| showClass  | ‘fadeInDown’ | CSS animation class for presenting popups (zoomIn, fadeInDown, fadeInScale, expandOpen, jumpUp) |
 >| hideClass  | ‘zoom out’ | CSS animation class for closing popups (zoomout) |
@@ -56,6 +56,7 @@ $('body').OUAlert({
     emergency  : {
     	class           : 'oualerts-notify-error',
         position        : 'modal', //Positions are ‘top’, ‘bottom’, ‘modal’
+        modalSize       : 'large', //Determines width of the modal if `position` is 'modal' (large, medium, small)
     	icon            : 'fa fa-bomb', //icon shown left of popup title. Icon CSS class or path to image.
         iconColor       : '#F44336', //Optional Ex: '#fff', sets icons color
         fontColor       : '', //Optional Ex: '#333', sets font color
@@ -157,3 +158,74 @@ $('#active-alert-div').OUAlert({
     }
 });
 ```
+
+## Custom Styling Options
+
+**Severity States**
+
+| class  | description |
+| ------------- | ------------- |
+| oualerts-error  | used when the severity is set to emergency|
+| oualerts-warning  | used when the severity is set to warning|
+| oualerts-info  | used when the severity is set to announcement|
+
+**Display Types**
+
+| class  | description |
+| ------------- | ------------- |
+| oualerts-modal | displaying the alert as a popup that covers the entire page|
+| oualerts-top | displaying the alert as a banner at the top of the browser window|
+| oualerts-bottom | displaying the alert as a banner at the bottom of the browser window|
+
+**Homepage Styling**
+
+| class  | description |
+| ------------- | ------------- |
+| oualerts-notify  | the main parent container for the alerts display|
+| oualerts-notify-body  | the container for all of the below items|
+| oualerts-notify-date  | the date and time of the alert|
+| oualerts-notify-title  |  the title of the alert |
+| oualerts-notify-subtitle | the subtitle of the alert |
+| oualerts-notify-msg | the description of the alert |
+| oualerts-notify-link  | the read more link, opens in a new window |
+| oualerts-close | 'x' for closing the alert |
+
+**Active Alert Page Styling**
+
+| id  | description |
+| ------------- | ------------- |
+| active-alert  | the main parent container for the active alert and its updates to display|
+
+| class  | description |
+| ------------- | ------------- |
+| oualerts-date | the date and time of the alert|
+| oualerts-notify-title  |  the title of the alert |
+| oualerts-notify-subtitle | the subtitle of the alert |
+| oualerts-msg | the description of the alert |
+| oualerts-active-update-list | the container for all of the updates |
+| oualerts-active-update | can be multiple depending on the number of updates that are present |
+| oualerts-active-update-title | the title of the alert update |
+| oualerts-active-update-date | the date and time of the alert update |
+| oualerts-active-update-msg | the description of the alert update |
+
+**Archived Alerts Page Styling**
+
+| id  | description |
+| ------------- | ------------- |
+| active-alert  | the main parent container for the archived alert and its updates to display|
+
+| class  | description |
+| ------------- | ------------- |
+| oualerts-archive-wrapper | the sub-parent container for all of the archived alerts and their updates to display|
+| oualerts-archive-list | the container for all of the archived alerts |
+| oualerts-archive | can be multiple depending on the number of archived alerts that are present |
+| oualerts-date  | the date and time of the alert|
+| oualerts-title  |  the title of the alert |
+| oualerts-subtitle | the subtitle of the alert |
+| oualerts-msg | the description of the alert |
+| oualerts-archive-update-header | the header to distinguish the updates for each archived alert |
+| oualerts-archive-update-cont | the container for all of the updates |
+| oualerts-archive-update | can be multiple depending on the number of updates that are present |
+| oualerts-active-update-title | the title of the alert update |
+| oualerts-active-update-date | the date and time of the alert update |
+| oualerts-active-update-msg | the description of the alert update |
