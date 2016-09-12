@@ -7,53 +7,53 @@
 		this.orgPadding = null;
 		this.severity = null;
 		this.defaults = {
-			archivedPath : '/ou-alerts/archived-alerts.xml',
-			activePath : '/ou-alerts/active-alerts.xml',
+			'archivedPath' : '/ou-alerts/archived-alerts.xml',
+			'activePath' : '/ou-alerts/active-alerts.xml',
 			//Alert details
-			icon         : false,
-			title        : true,
-			subtitle     : true,
-			description  : true,
-			link         : true,
-			date         : true,
-			dateFormat   : '',
+			'icon'         : false,
+			'title'        : true,
+			'subtitle'     : true,
+			'description'  : true,
+			'link'         : true,
+			'date'         : true,
+			'dateFormat'   : '',
 			//behavior
-			delay        : false,
-			closeOnClick : false,
-			popup        : true,
+			'delay'        : false,
+			'closeOnClick' : false,
+			'popup'        : true,
 			//CSS classes
-	        showClass: 'fadeInDown',
-	        hideClass: 'zoomOut',
-	        animationType : 'animated-fast',
-	        emergency: {
-	            class      : 'oualerts-notify-error',
-	            position   : 'modal',
-	            icon       : 'fa fa-exclamation-triangle',
-	            iconColor  : '#F44336',
-	            fontColor  : '',
-	            backgroundColor : '#FFC5C0',
-	            template   : false
+	        'showClass': 'fadeInDown',
+	        'hideClass': 'zoomOut',
+	        'animationType' : 'animated-fast',
+	        'emergency': {
+	            'class'      : 'oualerts-notify-error',
+	            'position'   : 'modal',
+	            'icon'       : 'fa fa-exclamation-triangle',
+	            'iconColor'  : '#F44336',
+	            'fontColor'  : '',
+	            'backgroundColor' : '#FFC5C0',
+	            'template'   : false
 	        },
-	        warning: {
-	            class    : 'oualerts-notify-warning',
-	            position : 'top',
-	            icon     : 'fa fa-exclamation-circle',
-	            iconColor : '#f08a24',
-	            fontColor : '',
-	            backgroundColor : '#FFE5C0',
-	            template   : false
+	        'warning': {
+	            'class'    : 'oualerts-notify-warning',
+	            'position' : 'top',
+	            'icon'     : 'fa fa-exclamation-circle',
+	            'iconColor' : '#f08a24',
+	            'fontColor' : '',
+	            'backgroundColor' : '#FFE5C0',
+	            'template'   : false
 	        },
-	        announcement: {
-	            class    : 'oualerts-notify-info',
-	            position : 'top',
-	            icon     : 'fa fa-bullhorn',
-	            iconColor  : '#6091ba',
-	            fontColor  : '',
-	            backgroundColor : '',
-	            template   : false
+	        'announcement': {
+	            'class'    : 'oualerts-notify-info',
+	            'position' : 'top',
+	            'icon'     : 'fa fa-bullhorn',
+	            'iconColor'  : '#6091ba',
+	            'fontColor'  : '',
+	            'backgroundColor' : '',
+	            'template'   : false
 	        },
-	        widgetTemplate : false,
-	        archiveHeader : true
+	        'widgetTemplate' : false,
+	        'archiveHeader' : true
 		};
 
 		$.extend(true, this.defaults, options);
@@ -169,7 +169,6 @@
 
     OUAlerts.prototype.remove = function () {
     	var self = this;
-
     	if (this.defaults[this.severity.toLowerCase()].position === 'top') {
 			this.el.css('padding-top', this.orgPadding);
     	}
@@ -177,9 +176,14 @@
     	this.$notification.removeClass(this.defaults.showClass)
                 .addClass(this.defaults.hideClass);
             
-        this.$notification.on('oanimationend animationend webkitAnimationEnd', function() { 
-		   self.$notification.remove();
-		});
+        if (window.AnimationEvent) {
+            this.$notification.on('oanimationend animationend webkitAnimationEnd', function() { 
+               self.$notification.remove();
+            });
+        } else {
+            self.$notification.remove();
+        }
+        
     };
 
     OUAlerts.prototype.prepareArchivedData = function (data) {
@@ -187,10 +191,10 @@
     	if (!data.rss.channel.item.length) {
     		return false;
     	}
-    	data.rss.channel.item.forEach(function (item) { 
+    	$.each(data.rss.channel.item, function (i, item) { 
     		if (item['dc:type']['#text'] === 'alert'){ 
     			item.updates = [];
-    			data.rss.channel.item.forEach(function (update) {
+    			$.each(data.rss.channel.item, function (i, update) {
     				if (update['dc:type']['#text'] === 'update' && update['dc:identifier']['#text'] === item['dc:identifier']['#text']){ 
 		    			item.updates.push(clean(update)); 
 		    		} 
@@ -219,7 +223,7 @@
     		return false;
     	}
 
-    	data.rss.channel.item.forEach(function (item) { 
+    	$.each(data.rss.channel.item, function (i, item) { 
     		if (item['dc:type']['#text'] === 'alert'){ 
     			alert = clean(item); 
     		} else
@@ -263,7 +267,7 @@
     	var $archiveHeader = $('<h2>Archived Alerts</h2>');
     	var $archiveList = $('<ul class="oualerts-archive-list"></ul>');
     	
-    	data.archive.forEach(function(item) {
+    	$.each(data.archive, function(i, item) {
     		var $alert = _alertTemplate(item, options);
     		var $tmpl = $('<li class="oualerts-archive"></li>');
     		var $updateCont = $('<ul class="oualerts-update-cont"/>');
@@ -275,7 +279,7 @@
                 $tmpl.append($updateContHeader);
     			$tmpl.append('<hr/>');
     			$tmpl.append($updateCont);
-    			item.updates.forEach(function(update, i) {
+    			$.each(item.updates, function(i, update) {
        				var $update = _updateTemplate(update, options, true);
     				var $updateTmpl = $('<li class="oualerts-archive-update"></li>');
                     if (i === item.updates.length - 1) {
@@ -353,7 +357,7 @@
     	var $updateHeader = $('<h4 class="oualerts-active-update-title">UPDATES</h4>');
     	var $updateCont = $('<ul class="oualerts-active-update-list"/>');
 
-    	data.updates.forEach(function(update, i) {
+    	$.each(data.updates, function(i, update) {
             var $updateTmpl = $('<li class="oualerts-active-update"></li>');
             $updateTmpl.append(_updateTemplate(update, options));
             if (i === data.updates.length - 1) {
@@ -380,7 +384,7 @@
             alertType = options[alert['ou:severity'].toLowerCase()],
             position = alertType.position,
             $notify = $('<div></div>', {
-                'class': 'oualerts-notify ' + alertType.class + ' ' + options.animationType + ' ' + options.showClass
+                'class': 'oualerts-notify ' + alertType['class'] + ' ' + options.animationType + ' ' + options.showClass
             });
 
         $body = $('<div class="oualerts-notify-body"/>');
@@ -418,7 +422,7 @@
         $notify.append($body);
 
         //close button
-    	$('<span class="oualerts-close">&times;</span>').click(function () {
+    	$('<span class="oualerts-close">&times;</span>').on('click', function () {
             self.remove();
         }).appendTo($notify);
 
