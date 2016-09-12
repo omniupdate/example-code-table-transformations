@@ -78,7 +78,7 @@ $('body').OUAlert({
     	icon            : 'fa fa-bullhorn',
         iconColor       : '#6091ba',
         fontColor       : '',
-        backgroundColor : '',
+        backgroundColor : '#B3CFE8',
         template        : false 
     }
 });
