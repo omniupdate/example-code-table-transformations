@@ -71,7 +71,7 @@
     		this.fetch('active').then(function(data) {
     			if (!data) { return; }
 	    		if (self.defaults.popup === true) {
-		    		self.notify(data.alert, self.defaults);
+		    		self.notify(data, self.defaults);
 	    		} else {
 	    			self.loading(true);
 	    			//widget
@@ -123,15 +123,15 @@
     	this.el.html(this.$widget);
     };
 
-    OUAlerts.prototype.notify = function (alert, options) {
+    OUAlerts.prototype.notify = function (data, options) {
     	//top, bottom, or modal view
     	var css, self = this;
-    	this.severity = alert['ou:severity'].toLowerCase();
+    	this.severity = data.alert['ou:severity'].toLowerCase();
 
     	if (typeof self.defaults[self.severity].template === 'function') {
-    		this.$notification = self.defaults[self.severity].template(alert, options);
+    		this.$notification = self.defaults[self.severity].template(data, options);
     	} else {
-    		this.$notification = this.createNotificationTemplate(alert, options);
+    		this.$notification = this.createNotificationTemplate(data.alert, options);
     	}
 
         if (options.closeOnClick) {
@@ -282,8 +282,6 @@
     	var $archiveCont = $('<div class="oualerts-archive-wrapper"></div>');
     	var $archiveHeader = $('<h2>Archived Alerts</h2>');
     	var $archiveList = $('<ul class="oualerts-archive-list"></ul>');
-
-        console.log(data);
     	
     	$.each(data.archive, function(i, item) {
     		var $alert = _alertTemplate(item, options);
