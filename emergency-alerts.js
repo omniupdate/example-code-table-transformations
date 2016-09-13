@@ -187,14 +187,22 @@
     };
 
     OUAlerts.prototype.prepareArchivedData = function (data) {
-    	var alerts = [];
-    	if (!data.rss.channel.item.length) {
-    		return false;
-    	}
-    	$.each(data.rss.channel.item, function (i, item) { 
+    	var items, alerts = [];
+
+        if (!data.rss.channel.item) {
+            return false;
+        }
+
+        if (data.rss.channel.item && !data.rss.channel.item.length) {
+            items = [data.rss.channel.item];
+        } else {
+            items = data.rss.channel.item;
+        }
+
+    	$.each(items, function (i, item) { 
     		if (item['dc:type']['#text'] === 'alert'){ 
     			item.updates = [];
-    			$.each(data.rss.channel.item, function (i, update) {
+    			$.each(items, function (i, update) {
     				if (update['dc:type']['#text'] === 'update' && update['dc:identifier']['#text'] === item['dc:identifier']['#text']){ 
 		    			item.updates.push(clean(update)); 
 		    		} 
@@ -274,6 +282,8 @@
     	var $archiveCont = $('<div class="oualerts-archive-wrapper"></div>');
     	var $archiveHeader = $('<h2>Archived Alerts</h2>');
     	var $archiveList = $('<ul class="oualerts-archive-list"></ul>');
+
+        console.log(data);
     	
     	$.each(data.archive, function(i, item) {
     		var $alert = _alertTemplate(item, options);

@@ -2,6 +2,11 @@ var gulp = require('gulp');
 var jshint = require('gulp-jshint');
 var uglify = require('gulp-uglify');
 var concat = require('gulp-concat');
+var fs = require('fs');
+
+var getPackageJson = function () {
+  return JSON.parse(fs.readFileSync('./package.json', 'utf8'));
+};
 
 //lint
 gulp.task('lint', function() {
