@@ -98,10 +98,10 @@ $('body').OUAlert({
         template : function (data, options) {
         	console.log("Alert data:",data);
         	var tmpl = 
-            	'<div class="alert-container">' 
+            	'<div class="alert-container">' +
             		'<div class="alert-title">' + data.title + '</div>' +
             		'<div class="alert-desc">' + data.description + '</div>' +
-            	'</div>'
+            	'</div>';
         	return tmpl;
         }
     }
@@ -150,7 +150,7 @@ $('#active-alert-div').OUAlert({
 	widgetTemplate : function (data, options) {
         console.log("Alert data:",data);
         var tmpl = 
-            '<div class="alert-container">' 
+            '<div class="alert-container">' +
                 '<div class="alert-title">' + data.title + '</div>' +
                 '<div class="alert-desc">' + data.description + '</div>' +
             '</div>'
