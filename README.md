@@ -32,6 +32,7 @@ Active Alert Pop-up Options
 >| popup  | true  |
 >| activePath  | '/ou-alerts/active-alerts.xml'  | default path to active alerts file |
 >| archivedPath  | '/ou-alerts/active-alerts.xml'  | default path to archived alerts file |
+>| showRecent | true | Alert popup will use the most recent update as the content, or the alert if no updates |
 >| delay  | false  | specifies delay in ms, before popup shows |
 >| closeOnClick  | true  | clicking anywhere closes the popup |
 >| animationType  | 'animated-fast'  | animation timing CSS class for presenting popups (animated-super-fast, animated-fast, animated, animated-slow) |

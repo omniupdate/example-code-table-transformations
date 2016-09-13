@@ -21,6 +21,7 @@
 			'delay'        : false,
 			'closeOnClick' : true,
 			'popup'        : true,
+            'showRecent'   : true,
 			//CSS classes
 	        'showClass': 'fadeInDown',
 	        'hideClass': 'zoomOut',
@@ -131,7 +132,22 @@
     	if (typeof self.defaults[self.severity].template === 'function') {
     		this.$notification = self.defaults[self.severity].template(data, options);
     	} else {
-    		this.$notification = this.createNotificationTemplate(data.alert, options);
+            if (options.showRecent) {
+                //get most recent update
+                var items = [];
+                items.push(data.alert);
+                items = items.concat(data.updates);
+                //sort
+                items.sort(function (a, b) {
+                    return new Date(b.pubDate) - new Date(a.pubDate);
+                });
+
+                items[0]['ou:severity'] = data.alert['ou:severity'];
+
+                this.$notification = this.createNotificationTemplate(items[0], options);
+            } else {
+                this.$notification = this.createNotificationTemplate(data.alert, options);
+            }    		
     	}
 
         if (options.closeOnClick) {
