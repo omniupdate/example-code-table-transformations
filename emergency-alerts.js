@@ -217,13 +217,19 @@
     };
 
     OUAlerts.prototype.prepareData = function (data) {
-    	var alert, updates = [];
+    	var alert, items, updates = [];
 
-    	if (!data.rss.channel.item.length) {
+    	if (!data.rss.channel.item) {
     		return false;
     	}
 
-    	$.each(data.rss.channel.item, function (i, item) { 
+        if (data.rss.channel.item && !data.rss.channel.item.length) {
+            items = [data.rss.channel.item];
+        } else {
+            items = data.rss.channel.item;
+        }
+
+    	$.each(items, function (i, item) { 
     		if (item['dc:type']['#text'] === 'alert'){ 
     			alert = clean(item); 
     		} else
@@ -231,10 +237,12 @@
     			updates.push(clean(item)); 
     		}
     	});
-
-    	updates.sort(function (a, b) {
-	        return new Date(b.pubDate) - new Date(a.pubDate);
-	    });
+        
+        if (updates.length){
+            updates.sort(function (a, b) {
+                return new Date(b.pubDate) - new Date(a.pubDate);
+            });
+        }
 
     	var feed = {
     		alert : alert,
@@ -367,10 +375,12 @@
             }
     	});
 
-    	$alertContainer
-    	.append($updateHeader)
-        .append('<hr/>')
-    	.append($updateCont);
+        if (data.updates.length) {
+            $alertContainer
+                .append($updateHeader)
+                .append('<hr/>')
+                .append($updateCont);
+        }
 
     	return $alertContainer;
     };
@@ -468,13 +478,11 @@
 	}
 
     function clean (data) {
-
     	for( var key in data) {
     		if (data[key]['#text']) {
     			data[key] = data[key]['#text'];
     		}
     	}
-
     	return data;
     }
 
