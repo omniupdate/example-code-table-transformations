@@ -19,7 +19,7 @@
 			'dateFormat'   : '',
 			//behavior
 			'delay'        : false,
-			'closeOnClick' : false,
+			'closeOnClick' : true,
 			'popup'        : true,
 			//CSS classes
 	        'showClass': 'fadeInDown',

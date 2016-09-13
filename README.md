@@ -33,7 +33,7 @@ Active Alert Pop-up Options
 >| activePath  | '/ou-alerts/active-alerts.xml'  | default path to active alerts file |
 >| archivedPath  | '/ou-alerts/active-alerts.xml'  | default path to archived alerts file |
 >| delay  | false  | specifies delay in ms, before popup shows |
->| closeOnClick  | false  | clicking anywhere closes the popup |
+>| closeOnClick  | true  | clicking anywhere closes the popup |
 >| animationType  | 'animated-fast'  | animation timing CSS class for presenting popups (animated-super-fast, animated-fast, animated, animated-slow) |
 >| showClass  | ‘fadeInDown’ | CSS animation class for presenting popups (zoomIn, fadeInDown, fadeInScale, expandOpen, jumpUp) |
 >| hideClass  | ‘zoom out’ | CSS animation class for closing popups (zoomout) |
