@@ -75,7 +75,7 @@ $('body').OUAlert({
     },
     announcement  : {
     	class           : 'oualerts-notify-info',
-        position        : 'modal', 
+        position        : 'top', 
     	icon            : 'fa fa-bullhorn',
         iconColor       : '#6091ba',
         fontColor       : '',
