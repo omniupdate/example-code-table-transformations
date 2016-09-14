@@ -1,20 +1,20 @@
 # Emergency Alerts jQuery plugin
 
-Basic useful feature list:
+**Basic useful feature list:**
 
  * Show active alert popup (Top, Bottom, Modal)
  * Add active alert widget to page.
  * Add archived alerts list widget to page
  * Add custom template to determine custom layout of widget or Pop-up
 
-Setup Requirements:
+**Setup Requirements:**
 
  * jQuery minimum version 1.12.4
- * emergency-alerts.js
+ * emergency-alerts.js or emergency-alerts.min.js
  * emergency-alerts.css
 
 
-Basic Active Alert Pop-up Sample:
+**Basic Active Alert Pop-up Sample:**
 
 ```javascript
 $('body').OUAlert({
@@ -24,7 +24,7 @@ $('body').OUAlert({
 });
 ```
 
-Active Alert Pop-up Options
+**Active Alert Pop-up Options**
 
 >| option  |  default | description |
 >| ------------- | ------------- | ------------- |
@@ -47,7 +47,7 @@ Active Alert Pop-up Options
 >| warning  | See Below  | Object that specifies how an warning alert is rendered |
 >| announcement  | See Below  | Object that specifies how an announcement alert is rendered |
 
-Custom Alert type handling sample (shows defaults):
+**Custom Alert type handling sample (shows defaults):**
 
 ```javascript
 $('body').OUAlert({
@@ -85,6 +85,20 @@ $('body').OUAlert({
 });
 ```
 
+**Alert Popup Positions**
+
+position : 'top'
+
+![gallena-homepage-warning](https://cloud.githubusercontent.com/assets/5931327/18522546/522ea5bc-7a65-11e6-90dc-a71bfc356166.png)
+
+position : 'modal'
+
+![gallena-homepage-emergency](https://cloud.githubusercontent.com/assets/5931327/18522558/5d4a77b4-7a65-11e6-8a6e-21f3af14d7d0.png)
+
+position : 'bottom'
+
+![gallena-homepage-announcement](https://cloud.githubusercontent.com/assets/5931327/18522566/661f0102-7a65-11e6-84b2-89d69aa9da6c.png)
+
 The 'emergency', 'warning', and 'announcement' objects are used to specify which class, position, icon, icon color, font color, background color, and optionally a custom template function for the given alert type. The 'template' option, if used, takes a function as its value with the following signature : function (data, options) {}; where 'data' is the data for the active/archived alert, and options are the passed options. This function must return the template that is going to be appended to the selector used. Unless you match the default CSS classes you will likely have to write your own CSS when using a custom template. 
 
 
@@ -121,6 +135,8 @@ $('#active-alert-div').OUAlert({
 });
 ```
 
+![emergency-alerts-active-web](https://cloud.githubusercontent.com/assets/5931327/18522583/74511a58-7a65-11e6-822f-d8be34b772f4.png)
+
 Archived Alert widget Sample:
 
 ```javascript
@@ -130,6 +146,8 @@ $('#archived-alerts-div').OUAlert({
     popup      : false
 });
 ```
+
+![emergency-alerts-archived-web](https://cloud.githubusercontent.com/assets/5931327/18522574/6ded45ec-7a65-11e6-8a05-f2d26c405739.png)
 
 When using as a widget the following options are availible :
 
