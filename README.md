@@ -28,8 +28,8 @@ $('body').OUAlert({
 
 >| option  |  default | description |
 >| ------------- | ------------- | ------------- |
->| type  | ‘active’  |
->| popup  | true  |
+>| type  | ‘active’  | Specifies which alert data to load ('active' or 'archived') |
+>| popup  | true  | Determines if the alert added to the page is a popup or widget |
 >| activePath  | '/ou-alerts/active-alerts.xml'  | default path to active alerts file |
 >| archivedPath  | '/ou-alerts/active-alerts.xml'  | default path to archived alerts file |
 >| showRecent | true | Alert popup will use the most recent update as the content, or the alert if no updates |
