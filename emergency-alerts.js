@@ -338,8 +338,10 @@
     var _alertTemplate = function (data, options) {
     	var $alertContainer = $('<article/>');
     	var $alertDate = $('<div class="oualerts-date">' + convertDateTime(data.pubDate) + '</div>');
-    	var $alertTitle = $('<h2 class="oualerts-title">' + data.title + '</h2>');
-    	var $alertDescription = $('<p class="oualerts-msg">' + data.description + '</p>');
+    	var $alertTitle = $('<h2 class="oualerts-title"></h2>');
+        $alertTitle.text(data.title);
+    	var $alertDescription = $('<p class="oualerts-msg"></p>');
+        $alertDescription.text(data.description);
 
         if (options.icon) {
            var $icon, icon = options[data['ou:severity'].toLowerCase()].icon;
@@ -362,8 +364,11 @@
     	.append($alertTitle);
 
     	if (data['ou:subtitle']) {
+            var $subTitle = $('<h3 class="oualerts-subtitle"></h3>');
+            $subTitle.text(data['ou:subtitle']);
+
     		$alertContainer
-	    	.append('<h3 class="oualerts-subtitle">' + data['ou:subtitle'] + '</h3>');
+	    	.append($subTitle);
     	}
 
     	$alertContainer
@@ -373,14 +378,19 @@
     };
 
     var _updateTemplate = function (data, options, archive) {
-    	var $update =
-    		'<article>' + 
-                '<div class="oualerts-date oualerts-active-update-date">' + convertDateTime(data.pubDate) + '</div>' +
-	    		'<h5 class="' + (archive ? '' : 'oualerts-active-update-title') + '">' + 
-	    		data.title + 
-	    		'</h5>' +
-	    		'<p class="oualerts-active-update-msg">' + data.description + '</p>' +
-	    	'</article>';
+        var $update = $('<article/>');
+        var $date = $('<div class="oualerts-date oualerts-active-update-date">' + convertDateTime(data.pubDate) + '</div>');
+        var $title = $('<h5 class="' + (archive ? '' : 'oualerts-active-update-title') + '"></h5>');
+        var $description = $('<p class="oualerts-active-update-msg"></p>');
+
+        $title.text(data.title);
+        $description.text(data.description);
+
+        $update
+            .append($date)
+            .append($title)
+            .append($description);
+
     	return $update;
     };
 
@@ -429,7 +439,8 @@
 			$body.append($date);
         }
         if (options.title) {
-        	var $title = $('<h3 class="oualerts-notify-title">' + alert.title + '</h3>');
+        	var $title = $('<h3 class="oualerts-notify-title"></h3>');
+            $title.text(alert.title);
         	if (options.icon) {
         		var $icon = $('<i class="' + alertType.icon + '"></i>');
         		var iconColor = alertType.iconColor;
@@ -441,11 +452,13 @@
         	$body.append($title);
         }
         if (options.subtitle && alert['ou:subtitle']) {
-        	var $subTitle = $('<h4 class="oualerts-notify-subtitle">' + alert['ou:subtitle'] + '</h4>');
+        	var $subTitle = $('<h4 class="oualerts-notify-subtitle"></h4>');
+            $subTitle.text(alert['ou:subtitle']);
         	$body.append($subTitle);
         }
         if (options.description) {
-        	var $desc = $('<p class="oualerts-notify-msg">' + alert.description + ' </p>');
+        	var $desc = $('<p class="oualerts-notify-msg"></p>');
+            $desc.text(alert.description);
 	       	if (options.link && alert.guid && alert.guid.indexOf('.xml') < 0) {
 	        	var $link = $('<a href="' + alert.guid + '" target="_blank" class="oualerts-notify-link">Read More...</a>');
 	        	$desc.append($link);
