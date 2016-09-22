@@ -252,7 +252,6 @@
         } else {
             items = data.rss.channel.item;
         }
-
     	$.each(items, function (i, item) { 
     		if (item['dc:type']['#text'] === 'alert'){ 
     			alert = clean(item); 
@@ -518,7 +517,9 @@
     	for( var key in data) {
     		if (data[key]['#text']) {
     			data[key] = data[key]['#text'];
-    		}
+    		} else {
+                data[key] = "";
+            }
     	}
     	return data;
     }
