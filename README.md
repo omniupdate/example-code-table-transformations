@@ -99,7 +99,7 @@ position : 'bottom'
 
 ![gallena-homepage-announcement](https://cloud.githubusercontent.com/assets/5931327/18522566/661f0102-7a65-11e6-84b2-89d69aa9da6c.png)
 
-The 'emergency', 'warning', and 'announcement' objects are used to specify which class, position, icon, icon color, font color, background color, and optionally a custom template function for the given alert type. The 'template' option, if used, takes a function as its value with the following signature : function (data, options) {}; where 'data' is the data for the active/archived alert, and options are the passed options. This function must return the template that is going to be appended to the selector used. Unless you match the default CSS classes you will likely have to write your own CSS when using a custom template. 
+The `emergency`, `warning`, and `announcement` objects are used to specify which class, position, icon, icon color, font color, background color, and optionally a custom template function for the given alert type. The 'template' option, if used, takes a function as its value with the following signature : function (data, options) {}; where 'data' is the data for the active/archived alert, and options are the passed options. This function must return the template that is going to be appended to the selector used. Unless you match the default CSS classes you will likely have to write your own CSS when using a custom template. 
 
 
 Heres an example of a custom template usage.
